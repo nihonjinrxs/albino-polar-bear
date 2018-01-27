@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Goal
+  - Wall
+  - DetectionArea
   layers:
   - Default
   - TransparentFX
@@ -13,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - BlockingLayer
   - 
   - 
   - 
@@ -41,9 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Dirt
+  - name: Ground
     uniqueID: 55960993
     locked: 0
-  - name: Player
+  - name: Items
+    uniqueID: 3049775475
+    locked: 0
+  - name: Units
     uniqueID: 3969954369
     locked: 0

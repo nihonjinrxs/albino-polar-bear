@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1055600151835884}
+  m_IsPrefabParent: 1
+--- !u!1 &1055600151835884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4635030969838892}
+  - component: {fileID: 114708877924260262}
+  - component: {fileID: 114075079195647000}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4635030969838892
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055600151835884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114075079195647000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055600151835884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f272fd12fbc544caa0c2d4eee5b6d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardScript: {fileID: 0}
+--- !u!114 &114708877924260262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055600151835884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb1b82d7a31149a887246273509adef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 6
+  rows: 6
+  barrierCount:
+    maximum: 10
+    minimum: 6
+  goal: {fileID: 1958357619527878, guid: 3230967102f624e789c49f6295eaaff7, type: 2}
+  floorTiles:
+  - {fileID: 1255955595819962, guid: 70c8863a00fbb4d7496c5d356606a5d8, type: 2}
+  - {fileID: 1970046742696726, guid: a7ed84dbe32224ab58233f2a299f9d26, type: 2}
+  barrierTiles:
+  - {fileID: 1685927844944176, guid: a54cfb61ee4a24187be0c84ab15fd861, type: 2}
+  - {fileID: 1819088119025178, guid: 3661590b653344bb1aa9df4119cf2ecd, type: 2}
+  - {fileID: 1526306780109318, guid: 60913f4d6e4ce49a2b1d6a1b3c983546, type: 2}
+  - {fileID: 1015138528996478, guid: 2ef082ebe87b74758a095d34e6c9863c, type: 2}
+  - {fileID: 1857846505722728, guid: a6a7c5484a3904b8299a13127d54fe7a, type: 2}
+  enemyTiles:
+  - {fileID: 1843060470591686, guid: b820c373284504173a222b8a1cf1d14c, type: 2}
+  outerWallTiles:
+  - {fileID: 1062721947474454, guid: 2952198c1cb3346a49b137f490a17ce5, type: 2}
