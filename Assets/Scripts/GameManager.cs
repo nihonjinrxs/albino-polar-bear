@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 
 	public BoardManager boardScript;
+	public int playerEnergyPoints = 100;
+	[HideInInspector] public bool playersTurn = true;
 
-	private int level = 3;
+	private int level = 6;
 
 	void Awake () {
 		if (instance == null)
@@ -22,6 +24,11 @@ public class GameManager : MonoBehaviour {
 
 	void InitGame(){
 		boardScript.SetupScene (level);
+	}
+
+	public void GameOver()
+	{
+		enabled = false;
 	}
 	
 	// Update is called once per frame

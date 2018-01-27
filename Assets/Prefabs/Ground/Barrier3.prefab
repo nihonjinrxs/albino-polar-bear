@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4331530458403002}
   - component: {fileID: 212757441397919348}
+  - component: {fileID: 114909182976527644}
   m_Layer: 0
   m_Name: Barrier3
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114909182976527644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1526306780109318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93351e525ee2d41aea4083a075f35b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSprite: {fileID: 21300000, guid: e5084757d3832fa4492c30cfcbe082f6, type: 3}
+  hp: 4
 --- !u!212 &212757441397919348
 SpriteRenderer:
   m_ObjectHideFlags: 1
