@@ -35,6 +35,12 @@ public class Enemy : MovingObject {
 		skipMove = true;
 	}
 
+    public void VisionCone()
+    {
+        if (Vector3.Angle(target.position - transform.position, transform.forward) < 22.5)
+            Debug.Log("I see you");
+    }
+
 	public void MoveEnemy()
 	{
 		// TODO: Change this to waypoint-based pathfinding patrol
