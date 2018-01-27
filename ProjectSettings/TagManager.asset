@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Wall
   - DetectionArea
+  - Energy
   layers:
   - Default
   - TransparentFX
