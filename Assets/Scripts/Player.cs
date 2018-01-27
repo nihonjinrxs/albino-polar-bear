@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MovingObject {
 
 	public int barrierDamage = 1;
 	public int pointsPerEnergy = 20;
 	public float restartLevelDelay = 1f;
+	public Text energyText;
 
 	private Animator animator;
 	private int energy;
@@ -17,6 +19,8 @@ public class Player : MovingObject {
 		animator = GetComponent<Animator> ();
 
 		energy = GameManager.instance.playerEnergyPoints;
+
+		energyText.text = "Energy: " + energy;
 
 		base.Start ();
 	}
@@ -47,6 +51,7 @@ public class Player : MovingObject {
 	protected override void AttemptMove <T> (int xDir, int yDir)
 	{
 		energy--;
+		energyText.text = "Energy: " + energy;
 
 		base.AttemptMove <T> (xDir, yDir);
 
@@ -59,11 +64,12 @@ public class Player : MovingObject {
 
 	private void OnTriggerEnter2D (Collider2D other)
 	{
-		if (other.tag == "Exit") {
+		if (other.tag == "Goal") {
 			Invoke ("Restart", restartLevelDelay);
 			enabled = false;
 		} else if (other.tag == "Energy") {
 			energy += pointsPerEnergy;
+			energyText.text = "Collected " + pointsPerEnergy + " energy!\nEnergy: " + energy;
 			other.gameObject.SetActive (false);
 		}
 	}
@@ -71,6 +77,7 @@ public class Player : MovingObject {
 	protected override void OnCantMove <T> (T component) {
 		Barrier hitBarrier = component as Barrier;
 		hitBarrier.DamageBarrier (barrierDamage);
+		LoseEnergy (4);
 		animator.SetTrigger ("playerStop");
 	}
 
@@ -83,6 +90,7 @@ public class Player : MovingObject {
 	{
 		animator.SetTrigger("playerStop");
 		energy -= loss;
+		energyText.text = "Lost " + loss + " energy!\nEnergy: " + energy;
 		CheckIfGameOver ();
 	}
 
