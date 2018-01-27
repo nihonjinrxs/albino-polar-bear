@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NUnit.Framework;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 
 	public BoardManager boardScript;
+	public float turnDelay = 0.1f;
 	public int playerEnergyPoints = 100;
 	[HideInInspector] public bool playersTurn = true;
 
 	private int level = 6;
+	private List<Enemy> enemies;
+	private bool enemiesMoving;
 
 	void Awake () {
 		if (instance == null)
@@ -19,10 +23,12 @@ public class GameManager : MonoBehaviour {
 
 		DontDestroyOnLoad (gameObject);
 		boardScript = GetComponent<BoardManager> ();
+		enemies = new List<Enemy> ();
 		InitGame ();
 	}
 
 	void InitGame(){
+		enemies.Clear ();
 		boardScript.SetupScene (level);
 	}
 
@@ -33,6 +39,31 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (playersTurn || enemiesMoving)
+			return;
+
+		StartCoroutine (MoveEnemies ());
+	}
+
+	public void AddEnemyToList(Enemy script)
+	{
+		enemies.Add (script);
+	}
+
+	IEnumerator MoveEnemies()
+	{
+		enemiesMoving = true;
+		yield return new WaitForSeconds (turnDelay);
+		if (enemies.Count == 0) {
+			yield return new WaitForSeconds (turnDelay);
+		}
+
+		for (int i = 0; i < enemies.Count; i++) {
+			enemies [i].MoveEnemy ();
+			yield return new WaitForSeconds (enemies [i].moveTime);
+		}
+
+		playersTurn = true;
+		enemiesMoving = false;
 	}
 }

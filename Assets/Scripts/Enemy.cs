@@ -12,6 +12,7 @@ public class Enemy : MovingObject {
 	private bool skipMove;
 
 	protected override void Start () {
+		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
 		target = GameObject.FindGameObjectWithTag ("Player").transform;
 		base.Start ();
@@ -53,7 +54,9 @@ public class Enemy : MovingObject {
 	{
 		Player hitPlayer = component as Player;
 
-		// TODO: Implement search visibility collision check
+		animator.SetTrigger ("enemyCapturePlayer");
+
+		// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
 		// TODO: Change this to capture when caught
 		hitPlayer.LoseEnergy (playerDamage);
 	}
