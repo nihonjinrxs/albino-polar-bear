@@ -10,8 +10,11 @@ public class Enemy : MovingObject {
 	private Animator animator;
 	private Transform target;
 	private bool skipMove;
+    private const float RAYCASTDIST = 5f;
+    private RaycastHit2D visionhit;
 
-	protected override void Start () {
+
+    protected override void Start () {
 		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
 		target = GameObject.FindGameObjectWithTag ("Player").transform;
@@ -19,9 +22,14 @@ public class Enemy : MovingObject {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        Vector3 targetDir = target.position - transform.position;
+        float angle = Vector3.Angle(targetDir, transform.forward);
+
+        if (angle < 5.0f)
+            print("close");
+    }
 
 	protected override void AttemptMove<T> (int xDir, int yDir)
 	{
@@ -35,10 +43,17 @@ public class Enemy : MovingObject {
 		skipMove = true;
 	}
 
+
     public void VisionCone()
     {
-        if (Vector3.Angle(target.position - transform.position, transform.forward) < 22.5)
+        Vector2 dir = this.transform.TransformDirection(Vector3.down) * RAYCASTDIST;
+        visionhit = Physics2D.Raycast(this.transform.position, Vector3.down, RAYCASTDIST);
+        Debug.DrawRay(this.transform.position, dir, Color.blue);
+        if(visionhit.collider != null && visionhit.collider.gameObject.name == "Player")
+        {
             Debug.Log("I see you");
+        }
+
     }
 
 	public void MoveEnemy()
@@ -65,5 +80,5 @@ public class Enemy : MovingObject {
 		// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
 		// TODO: Change this to capture when caught
 		hitPlayer.LoseEnergy (playerDamage);
-	}
+    }
 }
