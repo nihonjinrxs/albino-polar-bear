@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95402671188157070}
   - component: {fileID: 61118332478276126}
   - component: {fileID: 50046710666282128}
-  - component: {fileID: 114698054553422750}
+  - component: {fileID: 114814669542385264}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114698054553422750
+--- !u!114 &114814669542385264
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   barrierDamage: 1
   pointsPerEnergy: 20
   restartLevelDelay: 1
+  energyText: {fileID: 0}
 --- !u!212 &212751731016066740
 SpriteRenderer:
   m_ObjectHideFlags: 1
