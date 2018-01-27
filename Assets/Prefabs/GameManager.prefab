@@ -53,6 +53,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardScript: {fileID: 0}
+  levelStartDelay: 2
+  turnDelay: 0.1
+  playerEnergyPoints: 100
+  playersTurn: 1
 --- !u!114 &114708877924260262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,6 +73,9 @@ MonoBehaviour:
   barrierCount:
     maximum: 10
     minimum: 6
+  energyCount:
+    maximum: 6
+    minimum: 2
   goal: {fileID: 1958357619527878, guid: 3230967102f624e789c49f6295eaaff7, type: 2}
   floorTiles:
   - {fileID: 1255955595819962, guid: 70c8863a00fbb4d7496c5d356606a5d8, type: 2}
@@ -79,6 +86,8 @@ MonoBehaviour:
   - {fileID: 1526306780109318, guid: 60913f4d6e4ce49a2b1d6a1b3c983546, type: 2}
   - {fileID: 1015138528996478, guid: 2ef082ebe87b74758a095d34e6c9863c, type: 2}
   - {fileID: 1857846505722728, guid: a6a7c5484a3904b8299a13127d54fe7a, type: 2}
+  energyTiles:
+  - {fileID: 1638316408371046, guid: 970062eced8ea435482a39ada7d82cc9, type: 2}
   enemyTiles:
   - {fileID: 1843060470591686, guid: b820c373284504173a222b8a1cf1d14c, type: 2}
   outerWallTiles:
