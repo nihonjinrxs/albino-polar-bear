@@ -24,7 +24,8 @@ public class BoardManager : MonoBehaviour {
 	public Count barrierCount = new Count(6,10);
 	public Count energyCount = new Count(2, 6);
 	public GameObject goal;
-	public GameObject[] floorTiles;
+    public GameObject[] waypoints;
+    public GameObject[] floorTiles;
 	public GameObject[] barrierTiles;
 	public GameObject[] energyTiles;
 	public GameObject[] enemyTiles;
@@ -87,6 +88,6 @@ public class BoardManager : MonoBehaviour {
 		LayoutObjectAtRandom (energyTiles, energyCount.minimum, energyCount.maximum);
 		int enemyCount = (int)Mathf.Log (level, 2f);
 		LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
-		Instantiate (goal, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+        Instantiate (goal, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
 	}
 }
