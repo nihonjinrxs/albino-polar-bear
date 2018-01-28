@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 
 		levelImage = GameObject.Find ("Level Image");
 		levelText = GameObject.Find ("Level Text").GetComponent<Text> ();
-		levelText.text = "Transmission " + Convert.ToString(level, 2);
+		levelText.text = "Transmission\n" + Convert.ToString(level, 2);
 		levelImage.SetActive (true);
 		Invoke ("HideLevelImage", levelStartDelay);
 		
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver()
 	{
-		levelText.text = "Game Over\nYou successfully delivered " + (level - 1) + " transmissions.\nCan you do better next time?";
+		levelText.text = "Game Over\nYou successfully retrieved " + (level - 1) + " transmissions.\nCan you do better next time?";
 		levelImage.SetActive (true);
 		enabled = false;
 	}
