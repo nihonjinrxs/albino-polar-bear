@@ -4,7 +4,7 @@ using UnityEngine;
 using NUnit.Framework;
 using UnityEngine.UI;
 using System;
-using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
@@ -33,6 +33,30 @@ public class GameManager : MonoBehaviour {
 		enemies = new List<Enemy> ();
 		InitGame ();
 	}
+
+	/*
+	//This is called each time a scene is loaded.
+	private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+	{
+		//Add one to our level number.
+		level++;
+		//Call InitGame to initialize our level.
+		InitGame();
+	}
+
+	private void OnEnable()
+	{
+		//Tell our ‘OnLevelFinishedLoading’ function to start listening for a scene change event as soon as this script is enabled.
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+	}
+
+	private void OnDisable()
+	{
+		//Tell our ‘OnLevelFinishedLoading’ function to stop listening for a scene change event as soon as this script is disabled.
+		//Remember to always have an unsubscription for every delegate you subscribe to!
+		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+	}
+	*/
 
 	private void OnLevelWasLoaded(int index)
 	{
