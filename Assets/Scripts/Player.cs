@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class Player : MovingObject {
 
-	public int barrierDamage = 1;
+	public int barrierDamage = 2;
+	public int barrierHitEnergyLoss = 3;
 	public int pointsPerEnergy = 20;
 	public float restartLevelDelay = 1f;
 	public Text energyText;
@@ -87,7 +88,7 @@ public class Player : MovingObject {
 		animator.SetTrigger ("playerHit");
 		Barrier hitBarrier = component as Barrier;
 		hitBarrier.DamageBarrier (barrierDamage);
-		LoseEnergy (4);
+		LoseEnergy (barrierHitEnergyLoss);
 	}
 
 	private void Restart()

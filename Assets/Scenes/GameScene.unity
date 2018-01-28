@@ -157,6 +157,16 @@ Prefab:
       propertyPath: energyText
       value: 
       objectReference: {fileID: 611332321}
+    - target: {fileID: 114814669542385264, guid: 5c8e6a851bec54bd3822b7a42a8313f5,
+        type: 2}
+      propertyPath: barrierDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114814669542385264, guid: 5c8e6a851bec54bd3822b7a42a8313f5,
+        type: 2}
+      propertyPath: blockingLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c8e6a851bec54bd3822b7a42a8313f5, type: 2}
   m_IsPrefabParent: 0
