@@ -10,8 +10,11 @@ public class Enemy : MovingObject {
 	private Animator animator;
 	private Transform target;
 	private bool skipMove;
+    private const float RAYCASTDIST = 5f;
+    private RaycastHit2D visionhit;
 
-	protected override void Start () {
+
+    protected override void Start () {
 		GameManager.instance.AddEnemyToList (this);
 		animator = GetComponent<Animator> ();
 		target = GameObject.FindGameObjectWithTag ("Player").transform;
@@ -19,9 +22,14 @@ public class Enemy : MovingObject {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        Vector3 targetDir = target.position - transform.position;
+        float angle = Vector3.Angle(targetDir, transform.forward);
+
+        if (angle < 5.0f)
+            print("close");
+    }
 
 	protected override void AttemptMove<T> (int xDir, int yDir)
 	{
@@ -34,6 +42,13 @@ public class Enemy : MovingObject {
 
 		skipMove = true;
 	}
+
+
+    public void VisionCone()
+    {
+        
+
+    }
 
 	public void MoveEnemy()
 	{
@@ -48,28 +63,16 @@ public class Enemy : MovingObject {
 			xDir = target.position.x > transform.position.x ? 1 : -1;
 
 		AttemptMove<Player> (xDir, yDir);
-
-		if (xDir == -1)
-			animator.SetTrigger ("enemyMoveLeft");
-		if (yDir == -1)
-			animator.SetTrigger ("enemyMoveDown");
-		if (xDir == 1)
-			animator.SetTrigger ("enemyMoveRight");
-		if (yDir == 1)
-			animator.SetTrigger ("enemyMoveUp");
 	}
 
 	protected override void OnCantMove <T> (T component)
 	{
-		if (typeof(T) == typeof(Player)) {
-			Player hitPlayer = component as Player;
-			animator.SetTrigger ("enemyCapturePlayer");
+		Player hitPlayer = component as Player;
 
-			// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
-			// TODO: Change this to capture when caught
-			hitPlayer.LoseEnergy (playerDamage);
-		} else {
-			animator.SetTrigger ("enemyStop");
-		}
-	}
+		animator.SetTrigger ("enemyCapturePlayer");
+
+		// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
+		// TODO: Change this to capture when caught
+		hitPlayer.LoseEnergy (playerDamage);
+    }
 }
