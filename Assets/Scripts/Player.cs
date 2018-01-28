@@ -55,6 +55,15 @@ public class Player : MovingObject {
 
 		base.AttemptMove <T> (xDir, yDir);
 
+		if (xDir == -1)
+			animator.SetTrigger ("playerMoveLeft");
+		if (yDir == -1)
+			animator.SetTrigger ("playerMoveDown");
+		if (xDir == 1)
+			animator.SetTrigger ("playerMoveRight");
+		if (yDir == 1)
+			animator.SetTrigger ("playerMoveUp");
+
 		RaycastHit2D hit;
 
 		CheckIfGameOver ();
@@ -75,10 +84,10 @@ public class Player : MovingObject {
 	}
 
 	protected override void OnCantMove <T> (T component) {
+		animator.SetTrigger ("playerHit");
 		Barrier hitBarrier = component as Barrier;
 		hitBarrier.DamageBarrier (barrierDamage);
 		LoseEnergy (4);
-		animator.SetTrigger ("playerStop");
 	}
 
 	private void Restart()
@@ -88,7 +97,6 @@ public class Player : MovingObject {
 
 	public void LoseEnergy(int loss)
 	{
-		animator.SetTrigger("playerStop");
 		energy -= loss;
 		energyText.text = "Lost " + loss + " energy!\nEnergy: " + energy;
 		CheckIfGameOver ();
@@ -96,7 +104,7 @@ public class Player : MovingObject {
 
 	private void CheckIfGameOver()
 	{
-		if (energy == 0)
+		if (energy <= 0)
 			GameManager.instance.GameOver ();
 	}
 }
