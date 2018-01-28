@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using NUnit.Framework;
 
 public class BoardManager : MonoBehaviour {
 	[Serializable]
