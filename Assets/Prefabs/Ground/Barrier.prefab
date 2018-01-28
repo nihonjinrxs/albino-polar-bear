@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSprite: {fileID: 21300010, guid: cc52a98ad90824c39b2c7426ce0f4fb5, type: 3}
+  barrierDestroySound: {fileID: 8300000, guid: d43148ce20b6144628a447f957a421b3, type: 3}
   hp: 4
 --- !u!212 &212317237159172588
 SpriteRenderer:

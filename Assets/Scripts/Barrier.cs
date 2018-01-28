@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Barrier : MonoBehaviour {
 
 	public Sprite damageSprite;
+	public AudioClip barrierDestroySound;
 	public int hp = 4;
 
 	private SpriteRenderer spriteRenderer;
@@ -17,7 +19,9 @@ public class Barrier : MonoBehaviour {
 	{
 		spriteRenderer.sprite = damageSprite;
 		hp -= loss;
-		if (hp < 0)
+		if (hp < 0) {
+			SoundManager.instance.RandomizeSfx (barrierDestroySound);
 			gameObject.SetActive (false);
+		}
 	}
 }

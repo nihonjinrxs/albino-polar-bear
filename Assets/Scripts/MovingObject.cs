@@ -7,7 +7,7 @@ public abstract class MovingObject : MonoBehaviour {
 	public float moveTime;
 	public LayerMask blockingLayer;
 
-	private BoxCollider2D boxCollider;
+	public BoxCollider2D boxCollider;
 	private Rigidbody2D rb2d;
 	private float inverseMoveTime;
 
@@ -29,6 +29,22 @@ public abstract class MovingObject : MonoBehaviour {
 
 		if (hit.transform == null) {
 			StartCoroutine (SmoothMovement (end));
+			return true;
+		}
+
+		return false;
+	}
+
+	protected bool CanSee(int xDir, int yDir, int visibilityLength)
+	{
+		Vector2 start = transform.position;
+		Vector2 end = start + new Vector2 (xDir * visibilityLength, yDir * visibilityLength);
+
+		boxCollider.enabled = false;
+		RaycastHit2D hit = Physics2D.Linecast (start, end, blockingLayer);
+		boxCollider.enabled = true;
+
+		if (hit.transform != null) {
 			return true;
 		}
 

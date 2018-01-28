@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Player : MovingObject {
 
@@ -11,6 +12,11 @@ public class Player : MovingObject {
 	public int pointsPerEnergy = 20;
 	public float restartLevelDelay = 1f;
 	public Text energyText;
+	public AudioClip moveSound;
+	public AudioClip hitSound;
+	public AudioClip energySound;
+	public AudioClip goalSound;
+	public AudioClip gameOverSound;
 
 	private Animator animator;
 	private int energy;
@@ -66,6 +72,9 @@ public class Player : MovingObject {
 			animator.SetTrigger ("playerMoveUp");
 
 		RaycastHit2D hit;
+		if (Move (xDir, yDir, out hit)) {
+			SoundManager.instance.RandomizeSfx (moveSound);
+		}
 
 		CheckIfGameOver ();
 
@@ -75,9 +84,12 @@ public class Player : MovingObject {
 	private void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Goal") {
+			other.gameObject.SetActive (false);
+			SoundManager.instance.PlaySingle (goalSound);
 			Invoke ("Restart", restartLevelDelay);
 			enabled = false;
 		} else if (other.tag == "Energy") {
+			SoundManager.instance.RandomizeSfx (energySound);
 			energy += pointsPerEnergy;
 			energyText.text = "Collected " + pointsPerEnergy + " energy!\nEnergy: " + energy;
 			other.gameObject.SetActive (false);
@@ -86,6 +98,7 @@ public class Player : MovingObject {
 
 	protected override void OnCantMove <T> (T component) {
 		animator.SetTrigger ("playerHit");
+		SoundManager.instance.RandomizeSfx (hitSound);
 		Barrier hitBarrier = component as Barrier;
 		hitBarrier.DamageBarrier (barrierDamage);
 		LoseEnergy (barrierHitEnergyLoss);
@@ -105,7 +118,10 @@ public class Player : MovingObject {
 
 	private void CheckIfGameOver()
 	{
-		if (energy <= 0)
+		if (energy <= 0) {
+			SoundManager.instance.PlaySingle (gameOverSound);
+			SoundManager.instance.musicSource.Stop ();
 			GameManager.instance.GameOver ();
+		}
 	}
 }

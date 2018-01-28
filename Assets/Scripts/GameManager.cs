@@ -69,7 +69,22 @@ public class GameManager : MonoBehaviour {
 
 		levelImage = GameObject.Find ("Level Image");
 		levelText = GameObject.Find ("Level Text").GetComponent<Text> ();
-		levelText.text = "Transmission\n" + Convert.ToString(level, 2);
+		int levelBase;
+		string levelTag;
+		if (level < 16) {
+			levelBase = 2;
+			// levelTag = "\u2082";
+			levelTag = Convert.ToString(level, levelBase).PadLeft (4,'0') + "/b";
+		} else if (level < 512) {
+			levelBase = 8;
+			// levelTag = "\u2088";
+			levelTag = Convert.ToString(level, levelBase).PadLeft (3,'0') + "/o";
+		} else {
+			levelBase = 16;
+			// levelTag = "\u2081\u2086";
+			levelTag = Convert.ToString(level, levelBase).PadLeft (4,'0') + "/x";
+		}
+		levelText.text = "Transmission\n" + levelTag;
 		levelImage.SetActive (true);
 		Invoke ("HideLevelImage", levelStartDelay);
 		
