@@ -48,16 +48,28 @@ public class Enemy : MovingObject {
 			xDir = target.position.x > transform.position.x ? 1 : -1;
 
 		AttemptMove<Player> (xDir, yDir);
+
+		if (xDir == -1)
+			animator.SetTrigger ("enemyMoveLeft");
+		if (yDir == -1)
+			animator.SetTrigger ("enemyMoveDown");
+		if (xDir == 1)
+			animator.SetTrigger ("enemyMoveRight");
+		if (yDir == 1)
+			animator.SetTrigger ("enemyMoveUp");
 	}
 
 	protected override void OnCantMove <T> (T component)
 	{
-		Player hitPlayer = component as Player;
+		if (typeof(T) == typeof(Player)) {
+			Player hitPlayer = component as Player;
+			animator.SetTrigger ("enemyCapturePlayer");
 
-		animator.SetTrigger ("enemyCapturePlayer");
-
-		// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
-		// TODO: Change this to capture when caught
-		hitPlayer.LoseEnergy (playerDamage);
+			// TODO: Implement search visibility collision check using trigger "enemySpotPlayer"
+			// TODO: Change this to capture when caught
+			hitPlayer.LoseEnergy (playerDamage);
+		} else {
+			animator.SetTrigger ("enemyStop");
+		}
 	}
 }
